@@ -48,7 +48,6 @@ var questions = [
       document.body.appendChild(questionDisplay)
       questionDisplay.appendChild(qH1)
       questionDisplay.appendChild(qList)
-      console.log(questionDisplay)
   })
 
   console.log(questions[0].choices)
@@ -58,30 +57,37 @@ var questions = [
   //i found it makes working with them easier
   var choices = Object.values(questions[i].choices)
   var answer = questions[i].answer
-  console.log(answer)
 
-
+function createQuestion(){
   qH1.textContent = questions[i].title
   for(j = 0; j<4;j++){
     li = document.createElement("li")
     qList.appendChild(li);
     var qButton = document.createElement("button");
-    qButton.textContent = choices[j];
+    
     li.appendChild(qButton);
+    qButton.textContent = choices[j];
+}}
+  
+  createQuestion();
+ 
+
+  function changeQuestion(){
+    qH1.textContent = questions[i].title
+    qButton.textContent = choices[j];
   }
  
   //add event Listener for clicking answer
   questionDisplay.addEventListener("click", function(event){
       if(event.target.matches("button") && (event.target.textContent == answer)){
-      i++
-      j++
+      i++;
+      j++;
+      changeQuestion();
     }
     else{
         secondsLeft = (secondsLeft - 10);
     }
-      console.log(event.target.textContent)
-      console.log(answer)
-      console.log(i)
-      qH1.textContent = questions[i].title
+      console.log(choices[j])
+     
   })
   
