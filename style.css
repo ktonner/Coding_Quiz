@@ -20,10 +20,16 @@ button:hover{
     background: #cc33ff;
 }
 
-.welcome{
+#welcome{
     display: block;
 }
 
 #timer{
     float:right;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+li{
+    display:block;
+    margin: 10px;
 }
