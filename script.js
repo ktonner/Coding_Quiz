@@ -57,13 +57,31 @@ var questions = [
   //making the choices and the answers their own global variable
   //i found it makes working with them easier
   var choices = Object.values(questions[i].choices)
+  var answer = questions[i].answer
+  console.log(answer)
+
 
   qH1.textContent = questions[i].title
-  for(i = 0; i<4;i++){
+  for(j = 0; j<4;j++){
     li = document.createElement("li")
     qList.appendChild(li);
     var qButton = document.createElement("button");
-    qButton.textContent = choices[i];
+    qButton.textContent = choices[j];
     li.appendChild(qButton);
   }
  
+  //add event Listener for clicking answer
+  questionDisplay.addEventListener("click", function(event){
+      if(event.target.matches("button") && (event.target.textContent == answer)){
+      i++
+      j++
+    }
+    else{
+        secondsLeft = (secondsLeft - 10);
+    }
+      console.log(event.target.textContent)
+      console.log(answer)
+      console.log(i)
+      qH1.textContent = questions[i].title
+  })
+  
