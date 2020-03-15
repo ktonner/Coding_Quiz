@@ -10,12 +10,18 @@ timer.textContent = "Time: " + secondsLeft;
 //make sure it doesn't start until button is clicked
 startButton.addEventListener("click", function () {
   //then make the function counting down
-  setInterval(function () {
+ var timerInterval = setInterval(function () {
     secondsLeft--;
     timer.textContent = "Time: " + secondsLeft;
+    if(secondsLeft === 0) {
+      clearInterval(timerInterval);
+      alert("Done");
+    }
+
   }, 1000);
   console.log(secondsLeft)
 })
+
 
 //setting up questions
 var questions = [
@@ -38,9 +44,9 @@ var i = 0
 
 var welcome = document.getElementById("welcome")
 
-//making the choices and the answers their own global variable
+//making the answers their own global variable
 //i found it makes working with them easier
-var choices = Object.values(questions[i].choices)
+
 var answer = questions[i].answer
 
 //add new section for the questions
@@ -52,8 +58,9 @@ for (j = 0; j < 4; j++) {
   li = document.createElement("li")
   qList.appendChild(li);
   var qButton = document.createElement("button");
-  qButton.textContent = choices[j]
+  qButton.textContent = questions[i].choices[j]
   li.appendChild(qButton);}
+
 
 
 //when button is clicked, make welcome disappear
@@ -78,14 +85,15 @@ createQuestion();
 
 function changeQuestion() {
   qH1.textContent = questions[i].title
-  qButton.textContent = choices[i];
-}
+  //need to select each buttons' text somehow
+
+  }
+
 
 //add event Listener for clicking answer
 questionDisplay.addEventListener("click", function (event) {
   if (event.target.matches("button") && (event.target.textContent == answer)) {
     i++;
-    j++;
     changeQuestion();
   }
   else {
