@@ -13,15 +13,17 @@ startButton.addEventListener("click", function () {
  var timerInterval = setInterval(function () {
     secondsLeft--;
     timer.textContent = "Time: " + secondsLeft;
-    if(secondsLeft === 0) {
+    if(secondsLeft <= 0) {
       clearInterval(timerInterval);
-      alert("Done");
+      window.location.replace("score.html");
     }
 
   }, 1000);
   console.log(secondsLeft)
 })
 
+//declaring score variable
+var score = 0
 
 //setting up questions
 var questions = [
@@ -34,6 +36,12 @@ var questions = [
     title: "The link element must go inside the ____ section of an HTML document or page",
     choices: ["Footer", "Head", "Body", "Paragraph"],
     answer: "Head"
+  },
+
+  {
+    title: "How do you format a comment ",
+    choices: ["<stylesheet> mystyle.css </stylesheet>","<link rel","3","4"],
+    answer: "4"
   }
 ]
 
@@ -54,13 +62,6 @@ var questionDisplay = document.createElement("section")
 var qH1 = document.createElement("h1")
 var qList = document.createElement("ul")
 
-for (j = 0; j < 4; j++) {
-  li = document.createElement("li")
-  qList.appendChild(li);
-  var qButton = document.createElement("button");
-  qButton.textContent = questions[i].choices[j]
-  li.appendChild(qButton);}
-
 
 
 //when button is clicked, make welcome disappear
@@ -75,18 +76,20 @@ startButton.addEventListener("click", function () {
 console.log(questions[0].choices)
 
 
-function createQuestion() {
-  qH1.textContent = questions[i].title
-  }
 
-
-createQuestion();
-
+changeQuestion()
 
 function changeQuestion() {
   qH1.textContent = questions[i].title
   //need to select each buttons' text somehow
-
+  qList.innerHTML = ""
+  for (j = 0; j < 4; j++) {
+    li = document.createElement("li")
+    qList.appendChild(li);
+    var qButton = document.createElement("button");
+    qButton.textContent = questions[i].choices[j]
+    li.appendChild(qButton);}
+    answer = questions[i].answer;
   }
 
 
@@ -94,6 +97,8 @@ function changeQuestion() {
 questionDisplay.addEventListener("click", function (event) {
   if (event.target.matches("button") && (event.target.textContent == answer)) {
     i++;
+    score= score + 5;
+    localStorage.setItem("score", score)
     changeQuestion();
   }
   else {
@@ -101,3 +106,4 @@ questionDisplay.addEventListener("click", function (event) {
   }
 
 })
+
