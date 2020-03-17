@@ -19,6 +19,7 @@
 
         </ol>
         <br>
+        <p><button id="clear">Clear High Scores</button></p>
         <p><button id="tryAgain">Try again</button></p>
     </section>
 
@@ -34,14 +35,17 @@
         })
 
         //high score list creation
-        var highScores = $("#high-scores")
         var initials = localStorage.getItem("initials")
         var score = localStorage.getItem("score")
         var li = $("<li>")
+        li.addClass("scoreLi")
         li.text(initials + ": " + score)
-        highScores.append(li)
+        $("#high-scores").append(li)
 
         //clear high scores button
+        $("#clear").on("click", function(){
+            $("#high-scores").empty()
+        })
 
     </script>
 </body>
