@@ -35,5 +35,5 @@ li{
 }
 
 .scoreLi{
-    display:inline
+    list-style-type: georgian;
 }

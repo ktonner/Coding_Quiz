@@ -5,6 +5,12 @@ $(document).ready(function () {
     secondsLeft = 0
     timer.textContent = "Time: " + secondsLeft;
 
+    //high score button
+    highScoreBtn = document.getElementById("high-score")
+    highScoreBtn.addEventListener("click", function(){
+      window.location.assign("highscore.html")
+    })
+
     //showing score
     score = localStorage.getItem("score");
     scoreDisplay = document.getElementById("score")

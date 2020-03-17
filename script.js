@@ -23,6 +23,12 @@ startButton.addEventListener("click", function () {
   console.log(secondsLeft)
 })
 
+//high score button
+highScoreBtn = document.getElementById("high-score")
+highScoreBtn.addEventListener("click", function(){
+  window.location.assign("highscore.html")
+})
+
 //declaring score variable
 var score = 0
 
@@ -93,6 +99,13 @@ console.log(questions[0].choices)
 changeQuestion()
 
 function changeQuestion() {
+  //check for end of quiz
+  if(questions[i] == undefined){
+    score = score + secondsLeft
+    localStorage.setItem("score", score)
+    window.location.assign("score.html")
+  }
+  //change question
   qH1.textContent = questions[i].title
   //need to select each buttons' text somehow
   qList.innerHTML = ""
@@ -103,19 +116,17 @@ function changeQuestion() {
     qButton.textContent = questions[i].choices[j]
     li.appendChild(qButton);}
     answer = questions[i].answer;
-    if(questions[i].title == undefined){
-      localStorage.setItem("score", score)
-      window.location.replace("score.html");
-    }
+
   }
 
 
 //add event Listener for clicking answer
 questionDisplay.addEventListener("click", function (event) {
   if (event.target.matches("button") && (event.target.textContent == answer)) {
-    i++;
+    i++
     score= score + 5;
     localStorage.setItem("score", score)
+    console.log(i)
     changeQuestion();
   }
   else {
@@ -123,4 +134,5 @@ questionDisplay.addEventListener("click", function (event) {
   }
 
 })
+
 
