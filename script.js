@@ -14,6 +14,7 @@ startButton.addEventListener("click", function () {
     secondsLeft--;
     timer.textContent = "Time: " + secondsLeft;
     if(secondsLeft <= 0) {
+      localStorage.setItem("score", score)
       clearInterval(timerInterval);
       window.location.replace("score.html");
     }
@@ -39,9 +40,21 @@ var questions = [
   },
 
   {
-    title: "How do you format a comment ",
-    choices: ["<stylesheet> mystyle.css </stylesheet>","<link rel","3","4"],
-    answer: "4"
+    title: "How do you format a comment in a CSS file?",
+    choices: ["<comment>like this</comment","/*like this*/","//like this","<!--like this-->"],
+    answer: "/*like this*/"
+  },
+
+  {
+    title: "How do you write an alert box in javascript?",
+    choices: ["<alert('')","message('')","alert('')","alertBox('')"],
+    answer: "alert('')"
+  },
+  
+  {
+    title: "How does a for loop start?",
+    choices: ["for i = 0; i < 5","for (i = 0 to 5)","for(i<=0; i++)","for(i<0; i< array.length; i++)"],
+    answer: "for(i<0; i< array.length; i++)"
   }
 ]
 
@@ -90,6 +103,10 @@ function changeQuestion() {
     qButton.textContent = questions[i].choices[j]
     li.appendChild(qButton);}
     answer = questions[i].answer;
+    if(questions[i].title == undefined){
+      localStorage.setItem("score", score)
+      window.location.replace("score.html");
+    }
   }
 
 
